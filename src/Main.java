@@ -44,12 +44,6 @@ public class Main {
             count = 0;
             for (Ride ride : rides) {
                 Vehicle vehicle = vehicles.get(count);
-
-                int cost = vehicle.costIfAdd(ride);
-                if (cost > ride.latestFinish) {
-                    continue;
-                }
-
                 vehicle.addRide(ride);
                 count++;
                 count = count % vehicles.size();
