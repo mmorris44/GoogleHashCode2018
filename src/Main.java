@@ -36,7 +36,9 @@ public class Main {
             for (int i = 0; i < config.vehicles; i++) {
                 vehicles.add(new Vehicle());
             }
-
+            	
+            Collections.sort(rides, new RideCompare());
+            
             // Naive solution
             count = 0;
             for (Ride ride : rides) {
