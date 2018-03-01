@@ -5,18 +5,20 @@ import java.util.Scanner;
 
 public class Main {
 
+    final String FILE_NAME = "e_high_bonus.in";
+
     Configuration config;
     ArrayList<Ride> rides = new ArrayList<>();
     ArrayList<Vehicle> vehicles = new ArrayList<>();
 
     public static void main(String[] args) {
-        new Main(args);
+        new Main();
     }
 
-    public Main (String[] args) {
+    public Main () {
         try {
             // Setup scanner
-            Scanner scanner = new Scanner(new File(args[0]));
+            Scanner scanner = new Scanner(new File(FILE_NAME));
 
             // Read in config
             String line = scanner.nextLine();
@@ -38,15 +40,21 @@ public class Main {
             // Naive solution
             count = 0;
             for (Ride ride : rides) {
-                vehicles.get(count).addRide(ride.number);
+                Vehicle vehicle = vehicles.get(count);
 
+                int cost = vehicle.costIfAdd(ride);
+                if (cost > ride.latestFinish) {
+                    continue;
+                }
+
+                vehicle.addRide(ride);
                 count++;
                 count = count % vehicles.size();
             }
 
             Solution solution = new Solution();
             solution.setVehicles(vehicles);
-            solution.write("output.txt");
+            solution.write(FILE_NAME.split("\\.")[0] + ".out");
 
         } catch (Exception e) {
             e.printStackTrace();

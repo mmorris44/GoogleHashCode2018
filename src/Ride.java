@@ -25,4 +25,8 @@ public class Ride {
         latestFinish = Integer.parseInt(parts[5]);
     }
 
+    public int getDistance () {
+        return Math.abs(startColumn - endColumn) + Math.abs(startRow - endRow);
+    }
+
 }
